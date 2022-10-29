@@ -1,6 +1,5 @@
 # Jarkom-Modul-2-F12-2022
 
-# Jarkom-Modul-1-F13-2022
 Nama Anggota | NRP
 ------------------- | --------------
 Hesekiel Nainggolan | 5025201054
