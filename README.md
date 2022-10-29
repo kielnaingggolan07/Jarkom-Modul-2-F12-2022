@@ -88,6 +88,77 @@ Kemudian buat suatu script yang mengatur konfigurasi `db.local` pada `reverse dn
 ![Foto](./img2/no4b.PNG)
 <br>
 
-kemudian untuk melakukan pengecekan apakah berhasil atau tidak, maka bisa dicek pada node client `Garden` :
+kemudian untuk melakukan pengecekan apakah berhasil atau tidak, maka bisa dicek pada node client `SSS` :
+
 ![Foto](./img2/no4c.PNG)
+<br>
+
+5. Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama.
+## Jawaban Soal 5
+---
+Pertama kita harus ke  **Wise** dahulu dimana kita menambahkan `notify, also-notify  (dengan Berlint [10.35.3.2]) dan allow-transfer (dengan Berlint [10.46.3.2])`  di folder wise pada `/etc/bind/named.conf.local`
+
+![Foto](./img2/no5a.PNG)
+<br>
+
+Selanjutnya kita ke  **Berlint**  dimana kita menkonfigurasi zone Dns Slavenya di `/etc/bind/named.conf.local` dengan type slave dan memasukan IP yang menjadi masternya yaitu IP Wise `[10.35.2.2]` lalu kita lakukan restart ` service bind9 restart`
+
+![Foto](./img2/no5b.PNG)
+<br>
+
+lalu kita lakukan ping di `Garden` untuk mengetes dns slavenya berhasil atau tidak dengan mengetik `ping wise.F13.com`
+
+![Foto](./img2/no5c.PNG)
+<br>
+
+6. Karena banyak informasi dari Handler, buatlah subdomain yang khusus untuk operation yaitu operation.wise.yyy.com dengan alias `www.operation.wise.yyy.com` yang didelegasikan dari WISE ke Berlint dengan IP menuju ke Eden dalam folder operation.
+## Jawaban Soal 6
+---
+Hal pertama yang harus dilakukan ialah membuat script untuk menyimpan setting konfigurasi pada `/etc/bind/named.conf.local` yang dilakukan dalam script untuk pembuatan zone baru yang berisi `nama zone`, `type nya`, dan `lokasi konfigurasi db localnya`. Detilnya seperti gambar berikut:
+
+![Foto](./img2/no6a.PNG)
+<br>
+
+Lalu kami membuat sebuah script untuk mengcreate directory baru `operation`, mengcopy script yang berisikan pembuatan zone kedalam directory `/etc/bind/named.conf.local`, serta berisi `service bind9 restart` yang mana akan menyimpan konfigurasi db local yang bernama `operation`.
+
+![Foto](./img2/no6b.PNG)
+<br>
+
+Selanjutnya kami melakukan membuat suatu script untuk melakukan perubahan local host, serta membuat alias dengan `www` :
+
+![Foto](./img2/no6b.PNG)
+<br>
+
+Selanjutnya kita ke **Berlint** dimana kita menkonfigurasikan pada `etc/bind/named.conf.options`
+
+![Foto](./img2/no6c.PNG)
+<br>
+
+kemudian untuk melakukan pengecekan apakah berhasil atau tidak, maka bisa dicek pada node client `SSS` :
+
+![Foto](./img2/no6d.PNG)
+<br>
+
+7. Untuk informasi yang lebih spesifik mengenai Operation Strix, buatlah subdomain melalui Berlint dengan akses `strix.operation.wise.yyy.com` dengan alias `www.strix.operation.wise.yyy.com` yang mengarah ke Eden
+## Jawaban Soal 6
+---
+Hal pertama yang harus dilakukan ialah membuat script untuk menyimpan setting konfigurasi pada `/etc/bind/named.conf.local` yang dilakukan dalam script untuk pembuatan zone baru yang berisi `nama zone`, `type nya`, dan `lokasi konfigurasi db localnya`. Detilnya seperti gambar berikut:
+
+![Foto](./img2/no7a.PNG)
+<br>
+
+Lalu kami membuat sebuah script untuk mengcreate directory baru `operation`, mengcopy script yang berisikan pembuatan zone kedalam directory `/etc/bind/named.conf.local`, serta berisi `service bind9 restart` yang mana akan menyimpan konfigurasi db local yang bernama `operation`.
+
+![Foto](./img2/no7c.PNG)
+<br>
+
+Selanjutnya kami melakukan membuat suatu script untuk melakukan perubahan local host:
+
+![Foto](./img2/no7b.PNG)
+<br>
+
+
+kemudian untuk melakukan pengecekan apakah berhasil atau tidak, maka bisa dicek pada node client `SSS` :
+
+![Foto](./img2/no7d.PNG)
 <br>
